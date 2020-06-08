@@ -1,10 +1,21 @@
 package com.example.springwebapp.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
+import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Author {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String firstname;
     private String lastname;
+
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Author(String firstname, String lastname, Set<Book> books) {
@@ -14,6 +25,14 @@ public class Author {
     }
 
     public Author() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -38,5 +57,28 @@ public class Author {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", books=" + books +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return Objects.equals(id, author.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
