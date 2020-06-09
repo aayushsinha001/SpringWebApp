@@ -1,15 +1,13 @@
 package com.example.springwebapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Author {
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
